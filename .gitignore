@@ -1,1 +1,23 @@
+# зависимости
 node_modules/
+
+# сборка
+build/
+dist/
+coverage/
+
+# окружение — секреты в репозиторий не попадают
+.env
+.env.local
+.env.*.local
+
+# артефакты тестов
+/e2e-results/
+/playwright-report/
+taxi/e2e/.auth/
+
+# системное
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
