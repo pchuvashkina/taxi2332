@@ -34,6 +34,7 @@ npm run verify
 |---|---|
 | `lint:lockfile` | шаг 0 не выполнен |
 | `tokens:check` | `_tokens.scss` или `tokens.ts` правили руками вместо `tokens.json` |
+| `verify:static` | битая ссылка на переменную, несуществующий путь `@use`, отсутствующий экспорт `tokens.ts` |
 | `lint:tokens` | в код вернулись сырые значения — hex, px в шкалах, `@media`, шрифты |
 | `lint:styles` | stylelint нашёл нарушения в SCSS |
 | `npm test` | сломаны существующие тесты |
@@ -44,8 +45,11 @@ npm run verify
 ```bash
 node scripts/check-lockfile.mjs
 node scripts/build-tokens.mjs --check
+node scripts/verify-static.mjs
 node scripts/check-tokens.mjs
 ```
+
+`verify-static.mjs` проверяет то, что иначе всплыло бы только при сборке: что каждая `var(--X)` где-то объявлена (всего их 2203), что все пути `@use` резолвятся, что `@use` стоит раньше других правил (это hard error в Sass), что каждый `@include bp.bp-down(x)` использует существующий брейкпоинт и что все импорты из `styles/tokens` ссылаются на реально экспортируемые имена.
 
 **Отдельно стоит убедиться, что guard не «молчит впустую».** Проверка: временно вписать в любой SCSS-файл `color: #ff0000;` и запустить `npm run lint:tokens` — должно упасть с правилом `color-no-hex`. После проверки строку убрать.
 

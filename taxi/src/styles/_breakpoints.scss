@@ -2,6 +2,8 @@
 // Именование ЯВНО направленное: bp-down() = max-width, bp-up() = min-width.
 // Прежние xs/sm/md/lg/xl были двусмысленны: `@include lg` означал max-width: 768px.
 
+@use 'sass:map';
+
 $bp: (
   xs: 360px,   // мелкие Android
   sm: 380px,   // iPhone SE / mini
@@ -11,10 +13,10 @@ $bp: (
 );
 
 @function bp($name) {
-  @if not map-has-key($bp, $name) {
-    @error "Неизвестный брейкпоинт `#{$name}`. Доступны: #{map-keys($bp)}.";
+  @if not map.has-key($bp, $name) {
+    @error "Неизвестный брейкпоинт `#{$name}`. Доступны: #{map.keys($bp)}.";
   }
-  @return map-get($bp, $name);
+  @return map.get($bp, $name);
 }
 
 /// НА и НИЖЕ порога включительно.  @include bp-down(lg) -> max-width: 768px
