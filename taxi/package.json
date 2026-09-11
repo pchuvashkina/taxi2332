@@ -125,9 +125,10 @@
     "tokens:check": "node scripts/build-tokens.mjs --check",
     "lint:tokens": "node scripts/check-tokens.mjs",
     "lint:styles": "stylelint \"src/**/*.scss\"",
-    "verify": "npm run lint:lockfile && npm run tokens:check && npm run verify:static && npm run lint:tokens && npm run lint:styles && npm test -- --watchAll=false && npm run build",
+    "verify": "npm run lint:lockfile && npm run tokens:check && npm run verify:static && npm run lint:tokens && npm run lint:a11y && npm run lint:styles && npm test -- --watchAll=false && npm run build",
     "lint:lockfile": "node scripts/check-lockfile.mjs",
-    "verify:static": "node scripts/verify-static.mjs"
+    "verify:static": "node scripts/verify-static.mjs",
+    "lint:a11y": "node scripts/check-contrast.mjs"
   },
   "browserslist": {
     "production": [

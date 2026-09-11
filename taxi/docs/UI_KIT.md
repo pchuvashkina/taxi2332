@@ -9,6 +9,21 @@
 | [`UI_KIT_ACCEPTANCE.md`](UI_KIT_ACCEPTANCE.md) | чеклист приёмки: команды, экраны, ширины |
 | [`UI_KIT_TECH_DEBT.md`](UI_KIT_TECH_DEBT.md) | 6 задач, не вошедших в этап |
 
+## Документация дизайн-системы
+
+Нормативная часть вынесена в [`design-system/`](design-system/):
+
+| Документ | Что внутри |
+|---|---|
+| [`CONCEPT.md`](design-system/CONCEPT.md) | принципы и визуальный язык |
+| [`FOUNDATIONS.md`](design-system/FOUNDATIONS.md) | цвет, типографика, пространство, форма, движение, слои |
+| [`ACCESSIBILITY.md`](design-system/ACCESSIBILITY.md) | требования доступности и машинная проверка |
+| [`CONTRAST_MATRIX.md`](design-system/CONTRAST_MATRIX.md) | матрица контраста (генерируется) |
+| [`COMPONENTS.md`](design-system/COMPONENTS.md) | инвентарь компонентов и API |
+| [`PATTERNS.md`](design-system/PATTERNS.md) | составные решения |
+| [`TEMPLATES.md`](design-system/TEMPLATES.md) | шаблоны экранов |
+| [`CONTRIBUTING.md`](design-system/CONTRIBUTING.md) | порядок изменений и версионирование |
+
 
 ## Механизм
 
@@ -35,6 +50,7 @@ src/styles/tokens.json      ← единственный источник пра
 | `npm run lint:lockfile` | `package-lock.json` описывает всё из `package.json` | нет |
 | `npm run tokens:check` | сгенерированные файлы не разошлись с `tokens.json` | нет |
 | `npm run lint:tokens` | hex/named-цвета, сырые `font-size`, `border-radius`, `gap`, `z-index`, длительности, `@media`, `font-family`, shorthand `font`, сырые шкалы в inline-стилях — **и в SCSS, и в TS/TSX** | нет |
+| `npm run lint:a11y` | роли токенов и контраст по WCAG AA | нет |
 | `npm run lint:styles` | stylelint по SCSS (редакторная интеграция, те же правила) | да |
 | `npm run verify` | всё выше + тесты + сборка | да |
 

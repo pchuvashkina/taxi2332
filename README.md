@@ -21,6 +21,7 @@
 npm run tokens:build      # перегенерировать _tokens.scss и tokens.ts
 npm run tokens:check      # проверить, что они не разошлись с tokens.json
 npm run lint:tokens       # guard: сырые значения в SCSS и в TS/TSX
+npm run lint:a11y         # роли токенов и контраст по WCAG AA
 npm run lint:styles       # stylelint по SCSS
 npm run verify            # всё вместе + тесты + сборка
 ```
@@ -33,6 +34,7 @@ npm run verify            # всё вместе + тесты + сборка
 | [`taxi/docs/UI_KIT_AUDIT_BEFORE.md`](taxi/docs/UI_KIT_AUDIT_BEFORE.md) | состояние стилей до работы |
 | [`taxi/docs/UI_KIT_ACCEPTANCE.md`](taxi/docs/UI_KIT_ACCEPTANCE.md) | чеклист приёмки |
 | [`taxi/docs/UI_KIT_TECH_DEBT.md`](taxi/docs/UI_KIT_TECH_DEBT.md) | задачи, не вошедшие в этап |
+| [`taxi/docs/design-system/`](taxi/docs/design-system/) | **нормативная документация ДС**: концепция, основы, доступность, компоненты, паттерны, шаблоны |
 
 **Правило:** `_tokens.scss` и `tokens.ts` генерируются. Правится только `tokens.json`; прямые изменения в сгенерированных файлах отлавливает `tokens:check` и затирает следующая сборка.
 

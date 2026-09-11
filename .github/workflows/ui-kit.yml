@@ -32,6 +32,9 @@ jobs:
       - name: Guard дизайн-системы (SCSS и TS/TSX)
         run: node scripts/check-tokens.mjs
 
+      - name: Контраст и роли доступности
+        run: node scripts/check-contrast.mjs
+
   build:
     name: Линт, тесты, сборка
     runs-on: ubuntu-latest
