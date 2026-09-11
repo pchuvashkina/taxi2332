@@ -1,0 +1,25 @@
+// Брейкпоинты. Значения — зеркало breakpoints из tokens.json.
+// Именование ЯВНО направленное: bp-down() = max-width, bp-up() = min-width.
+// Прежние xs/sm/md/lg/xl были двусмысленны: `@include lg` означал max-width: 768px.
+
+$bp: (
+  xs: 360px,   // мелкие Android
+  sm: 380px,   // iPhone SE / mini
+  md: 560px,   // основной мобильный порог
+  lg: 768px,   // планшет
+  xl: 1024px,  // десктоп
+);
+
+@function bp($name) {
+  @if not map-has-key($bp, $name) {
+    @error "Неизвестный брейкпоинт `#{$name}`. Доступны: #{map-keys($bp)}.";
+  }
+  @return map-get($bp, $name);
+}
+
+/// НА и НИЖЕ порога включительно.  @include bp-down(lg) -> max-width: 768px
+@mixin bp-down($name) { @media (max-width: bp($name)) { @content; } }
+
+/// СТРОГО ВЫШЕ порога. @include bp-up(xl) -> min-width: 1025px
+/// Границы не перекрываются: ровно на 1024px срабатывает bp-down(xl).
+@mixin bp-up($name) { @media (min-width: bp($name) + 1px) { @content; } }

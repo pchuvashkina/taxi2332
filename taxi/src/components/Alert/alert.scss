@@ -1,0 +1,22 @@
+.alert {
+  padding: 20px;
+  color: var(--c-surface);
+  margin-bottom: 15px;
+  cursor: pointer;
+  border-radius: var(--r-lg);
+}
+
+.close-btn {
+  margin-left: 15px;
+  color: var(--c-surface);
+  font-weight: bold;
+  float: right;
+  font-size: var(--fs-xl);
+  line-height: 20px;
+  transition: var(--d-slow);
+  margin-top: 2px;
+}
+
+.close-btn:hover {
+  color: var(--c-black);
+}

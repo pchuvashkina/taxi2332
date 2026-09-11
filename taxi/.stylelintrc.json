@@ -1,0 +1,72 @@
+{
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "color-no-hex": [
+      true,
+      {
+        "message": "Цвет только из токена: var(--c-*). Новые значения — в src/styles/tokens.json."
+      }
+    ],
+    "color-named": [
+      "never",
+      {
+        "message": "Именованные цвета запрещены. Используй var(--c-*)."
+      }
+    ],
+    "declaration-property-value-disallowed-list": {
+      "font-family": [
+        "/^(?!var\\(--font-|inherit\\b)/"
+      ],
+      "font-size": [
+        "/(^|[\\s,(])\\d+(\\.\\d+)?(px|rem|em)/"
+      ],
+      "border-radius": [
+        "/(^|[\\s,(])\\d+(\\.\\d+)?(px|rem|em)/"
+      ],
+      "gap": [
+        "/(^|[\\s,(])\\d+(\\.\\d+)?(px|rem|em)/"
+      ],
+      "row-gap": [
+        "/(^|[\\s,(])\\d+(\\.\\d+)?(px|rem|em)/"
+      ],
+      "column-gap": [
+        "/(^|[\\s,(])\\d+(\\.\\d+)?(px|rem|em)/"
+      ],
+      "transition-duration": [
+        "/(^|[\\s,])\\d*\\.?\\d+m?s/"
+      ],
+      "animation-duration": [
+        "/(^|[\\s,])\\d*\\.?\\d+m?s/"
+      ],
+      "transition": [
+        "/(^|[\\s,])\\d*\\.?\\d+m?s/"
+      ],
+      "animation": [
+        "/(^|[\\s,])\\d*\\.?\\d+m?s/"
+      ],
+      "z-index": [
+        "/^[1-9]\\d*$/"
+      ],
+      "font": [
+        "/(^|[\\s,(\\/])\\d+(\\.\\d+)?(px|rem|em)/",
+        "/(?:Arial|Roboto|Tofu|Montserrat|Helvetica|sans-serif|serif)/"
+      ]
+    },
+    "scss/at-rule-no-unknown": true,
+    "media-feature-name-no-unknown": true,
+    "declaration-no-important": [
+      true,
+      {
+        "severity": "warning"
+      }
+    ]
+  },
+  "ignoreFiles": [
+    "src/styles/_tokens.scss",
+    "src/styles/_breakpoints.scss",
+    "src/lib/**",
+    "**/node_modules/**"
+  ]
+}

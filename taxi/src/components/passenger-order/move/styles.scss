@@ -1,0 +1,13 @@
+@use '../../../styles/breakpoints' as bp;
+.move-type {
+  &__tab {
+    width: 200px !important;
+    height: 120px !important;
+    @include bp.bp-down(lg) {
+      width: 50% !important;
+      * {
+        font-size: var(--fs-sm) !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.order-id {
+  white-space: nowrap;
+
+  &__suffix {
+    color: var(--p-orange-700);
+    font-weight: 700;
+  }
+}
+
+.colored .order-id__suffix {
+  color: var(--p-lime-900);
+}

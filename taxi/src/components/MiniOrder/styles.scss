@@ -1,0 +1,221 @@
+@import "../../tools/mixins.scss";
+
+.mini-order {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  width: 29%;
+  background: var(--c-surface);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: var(--r-lg);
+  margin-bottom: 18px;
+  cursor: pointer;
+  padding: 12px;
+  transition: all var(--d-slow) ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  &--profit {
+    &--low { background: var(--p-orange-500-3); }
+    &--medium { background: var(--p-yellow-300); }
+    &--high { background: var(--p-green-300); }
+  }
+
+  &--history {
+    filter: grayscale(100%);
+    opacity: 0.8;
+  }
+
+  @include sm {
+    width: 130px;
+    margin: 0 10px 18px 0;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+  }
+
+  .mini-order__time {
+    font-size: var(--fs-lg);
+    line-height: 22px;
+    text-align: center;
+    color: var(--p-gray-600);
+    margin: 4px 0;
+  }
+
+  .mini-order__icon {
+    font-weight: 600;
+    font-size: var(--fs-xl);
+    line-height: 28px;
+    color: var(--c-accent-dark);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-1);
+    height: 32px;
+    margin: 4px 0;
+
+    img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+    }
+  }
+
+  > img {
+    width: 70px;
+    height: 14px;
+    margin: 6px auto;
+    object-fit: contain;
+  }
+
+  .mini-order__amount {
+    font-size: var(--fs-md);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    font-weight: 600;
+    margin-top: 4px;
+
+    .amount__value {
+      font-size: var(--fs-xl);
+      line-height: 28px;
+      color: var(--p-blue-800);
+    }
+
+    .amount__currency {
+      align-self: flex-end;
+      margin-left: 4px;
+      color: var(--p-blue-800);
+      font-size: var(--fs-sm);
+    }
+
+    &._blue {
+      color: var(--c-info);
+      .amount__value,
+      .amount__currency { color: var(--c-info); }
+    }
+  }
+
+  .mini-order__chat-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--c-info) 0%, var(--p-blue-700-2) 100%);
+    border-radius: var(--r-md);
+    width: 64px;
+    height: 32px;
+    margin: 0 auto 8px auto;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(30,144,255,0.2);
+    transition: all var(--d-base) ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(30,144,255,0.3);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .colored {
+    color: var(--p-blue-800);
+    font-weight: 600;
+  }
+}
+
+.mini-order__meta-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0;
+}
+
+.mini-order .mini-order__status-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.mini-order .mini-order__status-icon img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.mini-order__offer-badge {
+  margin: 4px 0;
+  padding: 4px 8px;
+  border-radius: var(--r-full);
+  background: rgba(255, 36, 0, .08);
+  color: var(--c-accent);
+  font-size: var(--fs-xxs);
+  font-weight: 800;
+  text-align: center;
+}
+
+.mini-order .amount__hint {
+  margin-top: 2px;
+  font-size: var(--fs-xxs);
+  line-height: 1.1;
+  color: var(--c-text-secondary);
+  font-weight: 600;
+}
+
+.mini-order__profit,
+.mini-order__profit-relative {
+  font-size: var(--fs-xxs);
+  line-height: 1.1;
+  color: var(--p-blue-800);
+  font-weight: 600;
+}
+
+/* Перцентильная раскраска карточек по прибыльности — те же цвета и та же логика,
+   что у хинтов над булавками заказов на карте (pages/Driver/styles.scss).
+   p0 — нижние 20% (🔴 хуже остальных) … p4 — верхние 20% (💚 лучшие). Объявлены
+   ПОСЛЕ абсолютных low/medium/high, поэтому перекрывают их; убыточные — ниже всех. */
+.mini-order--profit-p0 { background: rgba(248, 196, 190, .97); }
+.mini-order--profit-p1 { background: rgba(255, 210, 158, .97); }
+.mini-order--profit-p2 { background: rgba(255, 244, 165, .97); }
+.mini-order--profit-p3 { background: rgba(206, 240, 190, .97); }
+.mini-order--profit-p4 { background: rgba(170, 238, 176, .98); }
+
+.mini-order--profit-p4 .mini-order__profit {
+  color: var(--p-green-800);
+  font-weight: 800;
+}
+
+.mini-order--profit-p0 .mini-order__profit {
+  color: var(--c-accent-dark);
+  font-weight: 800;
+}
+
+/* Убыточный заказ виден как убыточный при любой группе: цвет группы говорит
+   «лучше или хуже соседних», а минус — «ехать невыгодно вообще». */
+.mini-order--profit-negative {
+  background: rgba(242, 239, 237, .97);
+  filter: saturate(.78) brightness(.98);
+}
+
+.mini-order--profit-negative .mini-order__profit {
+  color: var(--c-accent-dark);
+  font-weight: 700;
+}

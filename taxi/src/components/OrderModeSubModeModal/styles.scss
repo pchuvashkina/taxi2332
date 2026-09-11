@@ -1,0 +1,111 @@
+.order-mode-sub {
+  position: fixed;
+  inset: 0;
+  // Над окном решения и тостами — это модальный выбор при включении режима.
+  z-index: var(--z-tooltip);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.45);
+  animation: order-mode-sub-fade var(--d-base) ease;
+
+  &__card {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px 20px;
+    border-radius: var(--r-lg);
+    background: var(--c-surface);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    animation: order-mode-sub-pop var(--d-base) ease;
+  }
+
+  &__title {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--p-blue-900);
+  }
+
+  &__subtitle {
+    margin-bottom: 20px;
+    font-size: var(--fs-sm);
+    color: var(--c-text-secondary);
+  }
+
+  &__option {
+    margin-top: 6px;
+  }
+
+  &__btn {
+    width: 100%;
+    padding: 13px 16px;
+    border: 0;
+    border-radius: var(--r-md);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    cursor: pointer;
+    touch-action: manipulation;
+
+    &--plus {
+      color: var(--c-surface);
+      background: var(--c-danger);
+
+      &:active {
+        background: var(--p-red-600-2);
+      }
+    }
+
+    &--minus {
+      color: var(--c-danger);
+      background: var(--c-surface);
+      border: 1.5px solid var(--c-danger);
+
+      &:active {
+        background: rgba(211, 47, 47, 0.08);
+      }
+    }
+  }
+
+  // Короткая «связка» между кнопкой и подписью к ней (как в макете).
+  &__tick {
+    display: block;
+    width: 1px;
+    height: 8px;
+    margin: 4px auto 0px;
+    background: rgba(228, 125, 125, 0.741);
+  }
+
+  &__hint {
+    font-size: var(--fs-xs);
+    line-height: 1.35;
+    color: var(--c-text-muted);
+  }
+
+  &__hint-accent {
+    color: var(--c-danger);
+    font-weight: 600;
+    font-size: var(--fs-xs);
+  }
+}
+
+@keyframes order-mode-sub-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes order-mode-sub-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

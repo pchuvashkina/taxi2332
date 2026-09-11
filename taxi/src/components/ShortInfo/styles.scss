@@ -1,0 +1,65 @@
+@use '../Theme';
+
+.short-info {
+  display: flex;
+  align-items: center;
+  column-gap: var(--s-2);
+  overflow-x: auto;
+  height: 16px;
+
+  &__item {
+    flex: none;
+    display: flex;
+    align-items: center;
+    column-gap: var(--s-1);
+    font-size: var(--fs-xxs);
+    font-weight: 500;
+  }
+
+  &__line {
+    width: 1px;
+    height: 12px;
+    border-radius: var(--r-xs);
+    background-color: var(--c-border);
+  }
+
+  &__icon {
+    width: 16px;
+    stroke: var(#{Theme.$foreground});
+  }
+
+  &__item--active &__icon {
+    stroke: var(#{Theme.$accent});
+  }
+
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+  &__item--activity {
+    margin-left: auto;
+  }
+
+  &__activity-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 18px;
+    padding: 0 5px;
+    border: 2px solid var(--p-green-600-2);
+    border-radius: var(--r-full);
+    background: var(--c-surface);
+    color: var(--c-success);
+    font-size: var(--fs-xxs);
+    line-height: 1;
+    font-weight: 800;
+    box-shadow: none;
+  }
+
+  &__text {
+    font-size: var(--fs-xxs);
+    font-weight: 500;
+  }
+}

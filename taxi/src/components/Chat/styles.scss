@@ -1,0 +1,109 @@
+.chat {
+  position: fixed !important;
+  right: 10px;
+  bottom: 0;
+  z-index: var(--z-dropdown);
+  background-color: var(--c-surface);
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+  border: 1px solid black;
+
+  form {
+    height: 100%;
+  }
+
+  &__toggler {
+    background: lighten(green, 10%);
+    padding: 5px;
+    font-size: var(--fs-lg);
+    height: 50px;
+    margin-top: 7px;
+    &:hover, &:focus {
+      background: var(--c-success);
+    }
+  }
+
+  &__header {
+    background-color: var(--c-info);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--c-surface);
+    font-size: var(--fs-lg);
+    font-weight: 500;
+    padding: 0 10px;
+    height: 50px;
+  }
+
+  &__close-button {
+    background: transparent;
+    color: var(--c-surface);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: var(--z-base);
+  }
+
+  &__messages {
+    padding: 5px;
+    overflow-y: scroll;
+    height: calc(100% - 100px);
+    overflow-anchor: none;
+  }
+
+  &__message {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 300;
+    &--action {
+      font-style: italic;
+      text-align: center;
+      font-size: var(--fs-md);
+      line-height: 1em;
+      .chat__name {
+        justify-content: center;
+        font-size: var(--fs-sm);
+      }
+    }
+  }
+
+  &__name {
+    display: block;
+    color: lighten(black, 20%);
+    font-size: var(--fs-sm);
+  }
+
+  &__footer {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    border-top: 1px solid black;
+  }
+
+  &__input {
+    margin-bottom: 0;
+    min-height: 40px;
+    width: 100%;
+    .input__wrapper {
+      margin: 0;
+      border: none;
+    }
+    .input {
+      margin: 0;
+      resize: none;
+      padding: 0 0 0 5px;
+      height: 40px;
+    }
+    .button {
+      height: 40px;
+      border-radius: var(--r-xs);
+      padding: 0 5px;
+    }
+  }
+}

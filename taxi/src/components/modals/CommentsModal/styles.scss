@@ -1,0 +1,151 @@
+@use '../../../styles/breakpoints' as bp;
+.comments-modal {
+  width: min(360px, calc(100vw - 32px));
+  max-width: 360px;
+  max-height: min(88vh, 600px);
+  padding: 16px;
+  border: 0;
+  overflow: hidden;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--s-3);
+    max-height: calc(min(88vh, 600px) - 32px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 2px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .checkbox {
+    min-height: 24px;
+    display: block;
+  }
+
+  .checkbox__label {
+    display: flex !important;
+    align-items: flex-start;
+    color: var(--c-navy);
+    font-size: var(--fs-xs);
+    line-height: 18px;
+    overflow-wrap: anywhere;
+    min-width: 0;
+    cursor: pointer;
+  }
+
+  .checkbox__input + .checkbox__label:before {
+    content: "" !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 22px;
+    width: 22px !important;
+    height: 22px !important;
+    margin: -2px 10px 0 0 !important;
+    border: 1.5px solid var(--accent, var(--c-accent)) !important;
+    border-radius: var(--r-sm) !important;
+    background: var(--c-surface) !important;
+    box-sizing: border-box;
+    color: var(--c-surface) !important;
+    font-size: var(--fs-sm);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .checkbox__input:checked + .checkbox__label:before {
+    content: "\2713" !important;
+    background: var(--accent, var(--c-accent)) !important;
+    border-color: var(--accent, var(--c-accent)) !important;
+  }
+
+  &__plane-inputs {
+    display: flex;
+    column-gap: var(--s-2);
+  }
+
+  .input {
+    min-height: 38px;
+    font-size: var(--fs-xs);
+  }
+
+  button {
+    min-height: 42px;
+    font-size: var(--fs-xs);
+  }
+
+  .button__wrapper {
+    position: sticky;
+    bottom: 0;
+    z-index: var(--z-base);
+    flex: 0 0 auto;
+    padding-top: 8px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0), var(--c-surface) 8px);
+  }
+}
+
+@include bp.bp-down(sm) {
+  .comments-modal {
+    width: calc(100vw - 28px);
+    padding: 14px;
+    border-radius: var(--r-lg);
+
+    &__form {
+      row-gap: var(--s-2);
+      max-height: calc(88vh - 28px);
+    }
+
+    &__plane-inputs {
+      flex-direction: column;
+      row-gap: var(--s-2);
+    }
+
+    .checkbox__label {
+      font-size: var(--fs-xs);
+      line-height: 17px;
+    }
+
+    .checkbox__input + .checkbox__label:before {
+      flex-basis: 20px;
+      width: 20px !important;
+      height: 20px !important;
+      margin-right: 8px !important;
+    }
+  }
+}
+
+/* 2026-06-01: keep the submit button visible inside the comment modal on 360x740. */
+.comments-modal .button__wrapper {
+  position: sticky !important;
+  bottom: -1px !important;
+  z-index: var(--z-base) !important;
+  display: flex !important;
+  width: 100% !important;
+  padding-top: 8px !important;
+  padding-bottom: 2px !important;
+  background: linear-gradient(180deg, rgba(255,255,255,0), var(--c-surface) 9px) !important;
+}
+
+.comments-modal .button {
+  display: flex !important;
+  width: 100% !important;
+  min-height: 42px !important;
+  border-radius: var(--r-md) !important;
+  background: var(--c-accent) !important;
+  color: var(--c-surface) !important;
+  font-size: var(--fs-xs) !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+// bp-exception: порог 380px вне шкалы, см. docs/UI_KIT.md задача UIKIT-BP
+@media (max-width: 380px) and (max-height: 780px) {
+  .comments-modal {
+    max-height: calc(100vh - 26px) !important;
+  }
+
+  .comments-modal__form {
+    max-height: calc(100vh - 54px) !important;
+    padding-bottom: 0 !important;
+  }
+}

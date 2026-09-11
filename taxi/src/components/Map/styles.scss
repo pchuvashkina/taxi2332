@@ -1,0 +1,321 @@
+@use '../../styles/breakpoints' as bp;
+.map-container {
+  height: calc(100vh - 100px);
+  width: 100%;
+  box-shadow: 0px 30px 12px rgba(0, 0, 0, 0.04);
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--c-surface);
+  margin: 0;
+  box-sizing: border-box;
+
+  &--modal {
+    border-radius: var(--r-sm);
+    height: 90%;
+    width: 90%;
+    z-index: var(--z-overlay);
+    padding: 10px;
+
+    .leaflet-marker-icon {
+      z-index: var(--z-overlay);
+    }
+  }
+
+  fieldset {
+    border-radius: var(--r-md);
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid var(--p-blue-500-2);
+
+    legend {
+      margin: 0 auto;
+      padding: 0 15px 0 15px;
+      color: var(--p-blue-800-2);
+      font-weight: 500;
+      font-size: var(--fs-xl);
+      line-height: 26px;
+      text-align: center;
+    }
+
+    h3, h4 {
+      font-weight: 300;
+      font-size: var(--fs-lg);
+      line-height: 23px;
+      text-align: center;
+    }
+
+  }
+
+  .active {
+    background-color: aliceblue;
+  }
+
+  &.get-coords-map-modal {
+    max-width: none;
+  }
+
+  &__leaflet-host {
+    height: 100%;
+    width: 100%;
+  }
+
+  .map {
+    height: 100%;
+    width: 100%;
+  }
+
+  .leaflet-container img,
+  .leaflet-container svg,
+  .leaflet-container canvas,
+  .leaflet-pane img,
+  .leaflet-pane svg,
+  .leaflet-pane canvas {
+    max-width: none !important;
+    max-height: none !important;
+  }
+
+  .leaflet-overlay-pane svg,
+  .leaflet-overlay-pane canvas {
+    display: block !important;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  &__locate-button {
+    position: absolute;
+    right: 18px;
+    top: auto;
+    bottom: 84px;
+    z-index: var(--z-tooltip);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--r-lg);
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    pointer-events: auto;
+    overflow: visible;
+    touch-action: manipulation;
+
+    &:hover,
+    &:active {
+      transform: none;
+      box-shadow: none;
+    }
+
+    img {
+      display: block;
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    &--passenger {
+      right: 18px;
+      top: auto;
+      bottom: 84px;
+    }
+
+    &--live-order {
+      right: 18px;
+      top: auto;
+      bottom: 38vh;
+    }
+  }
+
+  &__user-marker {
+    filter: drop-shadow(0 2px 5px rgba(30, 136, 255, .35));
+  }
+
+  &__driver-eta {
+    position: absolute;
+    left: 50%;
+    top: 112px;
+    bottom: auto;
+    z-index: var(--z-tooltip);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-1);
+    max-width: calc(100% - 28px);
+    padding: 6px 10px;
+    border-radius: var(--r-full);
+    background: rgba(255, 255, 255, .94);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .12);
+    color: var(--p-gray-800);
+    font-size: var(--fs-xs);
+    line-height: 1.15;
+    transform: translateX(-50%);
+    pointer-events: none;
+    white-space: nowrap;
+
+    b {
+      font-weight: 500;
+      color: var(--p-gray-600);
+    }
+
+    span {
+      font-weight: 700;
+      color: var(--p-gray-900);
+    }
+  }
+
+  &.passenger__form-map-container--live-order {
+    .map-container__driver-eta {
+      top: 118px;
+      bottom: auto;
+    }
+  }
+
+  .map-modal__route {
+    position: absolute;
+    top: 10px;
+    width: fit-content;
+    max-width: 200px;
+    left: 50px;
+    height: fit-content;
+    background-color: var(--c-secondary);
+    color: var(--c-black);
+    border: solid black 2px;
+    border-radius: var(--r-sm);
+    z-index: var(--z-tooltip);
+    margin: auto;
+    font-size: var(--fs-lg);
+    padding: 10px;
+  }
+
+  &__center-marker {
+    width: 25px;
+    height: 41px;
+    z-index: var(--z-dropdown);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    pointer-events: none;
+  }
+
+  .client-driver-marker {
+    background: transparent;
+    border: none;
+
+    img {
+      display: block;
+      width: 40px;
+      height: 40px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .28));
+    }
+  }
+
+  .modal-buttons {
+    position: absolute;
+    top: 96px;
+    bottom: auto;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    z-index: var(--z-dropdown);
+    &.z-indexed {
+      z-index: var(--z-overlay);
+    }
+
+    .button__wrapper {
+      margin-right: 10px;
+      margin-top: 96px;
+    bottom: auto;
+      width: fit-content;
+
+      button {
+        padding: 0 20px;
+      }
+    }
+  }
+
+  .leaflet-top.leaflet-left {
+    z-index: var(--z-dropdown);
+  }
+
+  .leaflet-control{
+    display: none;
+    margin-top:32px;
+
+    @include bp.bp-up(xl) {
+      display: block;
+    }
+  }
+}
+
+@include bp.bp-down(md) {
+  .map-container {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    box-shadow: none;
+  }
+
+  .map-container__locate-button--live-order {
+    bottom: 55vh;
+    right: 14px;
+  }
+}
+
+.smooth-rotating-marker {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.smooth-rotating-marker.leaflet-marker-icon,
+.client-driver-marker.leaflet-marker-icon {
+  position: relative;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.smooth-rotating-marker__image,
+.client-driver-marker .smooth-rotating-marker__image,
+.driver-arrow-divicon .smooth-rotating-marker__image {
+  display: block !important;
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: contain;
+  transform-origin: 50% 50%;
+  transition: transform var(--d-base) linear;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.smooth-rotating-marker__wrap {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 40px;
+  overflow: visible;
+}
+
+.smooth-rotating-marker__fallback-arrow {
+  display: none;
+}
+
+.smooth-rotating-marker__accent-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--c-surface);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .35);
+  z-index: var(--z-base);
+  pointer-events: none;
+}

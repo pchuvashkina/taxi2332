@@ -1,0 +1,109 @@
+$red: var(--c-accent);
+
+.boundary-buttons {
+  height: 40px;
+  display: flex;
+  column-gap: var(--s-1);
+  align-items: center;
+  margin-left: 16px;
+
+  &--disabled {
+    pointer-events: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: visible;
+    width: auto;
+    min-width: 40px;
+    max-width: 40px;
+    height: 40px;
+    border-radius: var(--r-lg);
+    background-color: var(--c-border);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: var(--d-slow) ease-in-out;
+    transition-property: max-width, background-color;
+
+    &--active {
+      background-color: $red;
+      max-width: 100%;
+    }
+  }
+
+  &--disabled &__item {
+    background-color: var(--c-text-disabled);
+
+    &--active {
+      background-color: var(--c-text-disabled);
+    }
+  }
+
+  &__text {
+    color: var(--c-surface);
+    font-weight: 600;
+    font-size: var(--fs-xs);
+    margin-right: 8px;
+  }
+
+  &__icon {
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 8px;
+  }
+
+}
+
+/* Chat 28.05: PNG status marker for auto/manual/overridden location mode selection. */
+.boundary-buttons {
+  &__status {
+    position: absolute;
+    top: -8px;
+    right: 2px;
+    z-index: var(--z-base);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
+
+  &__status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
+  &__status-image {
+    display: block;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  &__status--auto .boundary-buttons__status-badge {
+    background: var(--c-surface);
+    box-shadow: 0 1px 4px rgba(15, 23, 42, .18);
+  }
+
+  &__status--auto .boundary-buttons__status-image {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.boundary-buttons__item:not(.boundary-buttons__item--active) .boundary-buttons__text {
+  display: none;
+}
