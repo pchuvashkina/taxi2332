@@ -1,14 +1,15 @@
 # TDM UI Coverage Matrix
 
-Документ содержит фактический аудит всех UI-элементов приложения TDM (`src/components/**` и `src/pages/**`) и их сопоставление с текущим состоянием дизайн-системы Taxi DS (`stepanstepanec0-lang/taxi2332` ветка `main`).
+Документ содержит обновленный аудит всех UI-элементов приложения TDM (`src/components/**` и `src/pages/**`), проверенных на соответствие фактической файловой структуре исходного репозитория, и их сопоставление с текущим состоянием дизайн-системы Taxi DS (`stepanstepanec0-lang/taxi2332` ветка `main`).
 
 ---
 
 ## 1. Key Architecture & Classification Guidelines
 
-1. **SPECIALIZED Status**: Присваивается компонентам со специфичной доменной логикой или уникальной версткой. Данный статус **не освобождает** внутренние элементы компонента (кнопки, инпуты, карточки) от обязательной токенизации и замены на примитивы Taxi DS в рамках ТЗ №2.
-2. **MISSING Status**: Означает отсутствие прямого визуального или функционального аналога в Taxi DS. На данном этапе аудита **не проектируются** будущие компоненты DS; способы унификации и интеграции определятся на этапе ТЗ №2.
-3. **Raw HTML Elements**: Все случаи использования базовых HTML-тегов (`<button>`, `<input>`) классифицированы как `PARTIAL` с обязательным требованием миграции на примитивы DS.
+1. **Strict File Alignment**: Матрица содержит только реальные директории и файлы из `src/components/**` и `src/pages/**`. Элементы из `src/platform/**` и эмулятора `driver-emulator` в данный аудит не входят.
+2. **SPECIALIZED Status**: Присваивается компонентам со специфичной доменной логикой или уникальной версткой. Данный статус **не освобождает** внутренние элементы компонента (кнопки, инпуты, карточки) от обязательной токенизации и замены на примитивы Taxi DS в рамках ТЗ №2.
+3. **MISSING Status**: Означает отсутствие прямого визуального или функционального аналога в Taxi DS. На данном этапе аудита **не проектируются** будущие компоненты DS.
+4. **Raw HTML Elements**: Все случаи использования базовых HTML-тегов (`<button>`, `<input>`) классифицированы как `PARTIAL` с обязательным требованием миграции на примитивы DS.
 
 ---
 
@@ -17,11 +18,8 @@
 ### Page-Level UI & Main Views
 | TDM Element | TDM Path | Type | Usage | Taxi DS Element | Taxi Path | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **PassengerLiveOrder** | `src/components/PassengerLiveOrder`, `src/pages/Passenger` | page-level UI | Экран активного заказа пассажира | — | — | `PARTIAL` |
-| **DriverDashboard / DriverMap** | `src/pages/Driver` | page-level UI | Главный экран водителя | — | — | `PARTIAL` |
-| **OrdersPage** | `src/pages/Orders` | page-level UI | История заказов | — | — | `PARTIAL` |
-| **OrderDetailsPage** | `src/pages/OrderDetails` | page-level UI | Детализация конкретного заказа | — | — | `PARTIAL` |
-| **PassengerVoting** | `src/pages/PassengerVoting` | page-level UI | Экран голосования пассажира | — | — | `PARTIAL` |
+| **Passenger** | `src/pages/Passenger` | page-level UI | Главный экран пассажира | — | — | `PARTIAL` |
+| **Driver** | `src/pages/Driver` | page-level UI | Главный экран водителя | — | — | `PARTIAL` |
 
 ---
 
@@ -30,8 +28,6 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **BigTruckServices** | `src/components/BigTruckServices` | composite | Выбор спецтранспорта | — | — | `SPECIALIZED` |
 | **ConstructorTab** | `src/components/ConstructorTab` | composite | Вкладка конструктора тарифов | — | — | `PARTIAL` |
-| **PassengerOrderFlow** | `src/components/PassengerOrderFlow` | composite | Панель оформления заказа | — | — | `PARTIAL` |
-| **DriverOrderCandidates** | `src/components/DriverOrderCandidates` | composite | Список доступных заказов водителя | — | — | `PARTIAL` |
 | **furniture** | `src/components/furniture` | composite | Выбор параметров перевозки мебели | — | — | `SPECIALIZED` |
 | **rooms** | `src/components/rooms` | composite | Выбор количества комнат | — | — | `SPECIALIZED` |
 | **CompareVariants** | `src/components/CompareVariants` | composite | Сравнение вариантов тарифов | — | — | `MISSING` |
@@ -52,14 +48,14 @@
 | **OnTheWayModal** | `src/components/OnTheWayModal` | modal | Уведомление «Водитель в пути» | — | — | `PARTIAL` |
 | **RatingModal** | `src/components/RatingModal` | modal | Выставление рейтинга | — | — | `PARTIAL` |
 | **TakePassengerModal** | `src/components/TakePassengerModal` | modal | Подтверждение посадки | — | — | `PARTIAL` |
-| **OrderModeModal (Intercity)** | `src/components/OrderModeModal` | modal | Выбор междугороднего режима | — | — | `PARTIAL` |
-| **OrderModeModal (Delivery)** | `src/components/OrderModeModal` | modal | Выбор режима доставки | — | — | `PARTIAL` |
+| **OrderModeModal** | `src/components/OrderModeModal` | modal | Выбор спец-режима (Межгород / Доставка) | — | — | `PARTIAL` |
 
 ---
 
 ### Standalone UI & Feedback Controls
 | TDM Element | TDM Path | Type | Usage | Taxi DS Element | Taxi Path | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **PassengerLiveOrder** | `src/components/PassengerLiveOrder` | component | Панель активного заказа пассажира | — | — | `PARTIAL` |
 | **CarClassBadge** | `src/components/CarClassBadge` | component | Бейдж класса автомобиля | — | — | `PARTIAL` |
 | **CarClassSlider** | `src/components/CarClassSlider` | component | Слайдер выбора авто | — | — | `PARTIAL` |
 | **DriverStatusIcon** | `src/components/DriverStatusIcon` | component | Индикатор статуса водителя | Badge | `src/components/Badge` | `PARTIAL` |
@@ -104,7 +100,7 @@
 ### Maps, Overlays & Structural Legacy
 | TDM Element | TDM Path | Type | Usage | Taxi DS Element | Taxi Path | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Map Routes & Markers** | `src/components/Map` | map overlay | Маркеры и линии маршрутов | — | — | `SPECIALIZED` |
+| **Map** | `src/components/Map` | map overlay | Маркеры и линии маршрутов | — | — | `SPECIALIZED` |
 | **objectHints** | `src/components/objectHints` | map overlay | Подсказки объектов на карте | — | — | `SPECIALIZED` |
 | **version-info** | `src/components/version-info` | legacy ui | Отображение версии системы | — | — | `LEGACY-UI` |
 
@@ -112,12 +108,10 @@
 
 ## 3. Summary Statistics
 
-* **Total UI Units Audited:** 54
+* **Total UI Units Audited:** 49
 * **COVERED:** 7
-* **PARTIAL:** 31
+* **PARTIAL:** 26
 * **DUPLICATE:** 2
 * **MISSING:** 8
 * **SPECIALIZED:** 5
 * **LEGACY-UI:** 1
-
-*(Математика: 7 + 31 + 2 + 8 + 5 + 1 = 54).*
